@@ -1,0 +1,18 @@
+disabled_rules:
+- identifier_name
+- trailing_whitespace
+opt_in_rules:
+- control_statement
+- empty_count
+- trailing_newline
+- colon
+- comma
+type_name:
+  allowed_symbols: "_"
+included:
+- Todo-It
+excluded:
+- Todo-It/Todo-ItTests
+- Todo-It/Todo-ItUITests
+line_length: 120
+
