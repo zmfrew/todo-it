@@ -1,22 +1,17 @@
 import SwiftUI
 
+typealias AppStore = Store<AppState, AppAction>
+
 struct TodoListView: View {
+    @EnvironmentObject var store: AppStore
     @State private var isAddingTodo = false
-    @State private var newTodo = Todo(description: "")
-    @State private var todos = [
-        Todo(description: "Walk the dog"),
-        Todo(description: "Go for a bike ride"),
-        Todo(description: "Do the laundry"),
-        Todo(description: "Meal prep"),
-        Todo(description: "Start Todo app")
-    ]
     
     var body: some View {
         NavigationView {
             ZStack(alignment: .bottomTrailing) {
                 List {
-                    ForEach(todos.enumerated().map { $0 }, id: \.element.id) { index, todo in
-                        TodoView(todo: $todos[index])
+                    ForEach(store.state.todos.enumerated().map { $0 }, id: \.element.id) { index, todo in
+                        TodoView(todo: $store.state.todos[index])
                     }
                     .onDelete(perform: delete)
                 }
@@ -24,7 +19,7 @@ struct TodoListView: View {
                 Button(action: {
                     if !isAddingTodo {
                         isAddingTodo = true
-                        addNewTodo()
+                        store.send(.add(todo: Todo(description: "")))
                     }
                 }) {
                     Image(systemName: "plus.circle.fill")
@@ -37,12 +32,8 @@ struct TodoListView: View {
         }
     }
     
-    private func addNewTodo() {
-        todos.append(Todo(description: ""))
-    }
-    
     func delete(at offsets: IndexSet) {
-        todos.remove(atOffsets: offsets)
+        store.send(.delete(at: offsets))
     }
 }
 

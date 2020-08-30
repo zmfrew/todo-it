@@ -9,7 +9,9 @@ struct TodoView: View {
                 .resizable()
                 .frame(width: 30, height: 30)
             
-            TextField("Add todo", text: $todo.description) {  }
+            TextField("Add todo", text: $todo.description) {
+                // perform app action
+            }
         }
     }
 }
