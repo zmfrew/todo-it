@@ -11,7 +11,9 @@ struct TodoListView: View {
             ZStack(alignment: .bottomTrailing) {
                 List {
                     ForEach(store.state.todos.enumerated().map { $0 }, id: \.element.id) { index, todo in
-                        TodoView(todo: $store.state.todos[index])
+                        TodoView(todo: $store.state.todos[index]) { editedTodo in
+                            store.send(.edit(todo: editedTodo))
+                        }
                     }
                     .onDelete(perform: delete)
                 }

@@ -1,7 +1,7 @@
 import SwiftUI
 
 final class Store<State, Action>: ObservableObject {
-    @Published var state: State // TODO: make private(set)
+    @Published var state: State
     private let reducer: Reducer<State, Action>
     
     init(initialState: State, reducer: @escaping Reducer<State, Action>) {
