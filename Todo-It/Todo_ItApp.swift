@@ -6,7 +6,10 @@ struct Todo_ItApp: App {
         WindowGroup {
             TodoListView()
                 .environmentObject(
-                    AppStore(initialState: .init(), reducer: appReducer)
+                    AppStore(
+                        initialState: .init(PersistenceManager(NotificationCenter.default)),
+                         reducer: appReducer
+                    )
                 )
         }
     }

@@ -18,6 +18,11 @@
 		B646EC0C24FC295E00B5B7AE /* AppAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B646EC0B24FC295E00B5B7AE /* AppAction.swift */; };
 		B646EC0E24FC298A00B5B7AE /* Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B646EC0D24FC298A00B5B7AE /* Reducer.swift */; };
 		B65CA24124EEC989004A4278 /* TodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65CA24024EEC989004A4278 /* TodoView.swift */; };
+		B685DE03251044B200B6D5D2 /* Todo-It.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B685DE01251044B200B6D5D2 /* Todo-It.xcdatamodeld */; };
+		B685DE0C2510473A00B6D5D2 /* CDTodo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B685DE04251045ED00B6D5D2 /* CDTodo+CoreDataClass.swift */; };
+		B685DE0D2510473A00B6D5D2 /* CDTodo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B685DE05251045ED00B6D5D2 /* CDTodo+CoreDataProperties.swift */; };
+		B685DE10251047D800B6D5D2 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B685DE0F251047D800B6D5D2 /* PersistenceManager.swift */; };
+		B685DE1225104D2700B6D5D2 /* CoreDataConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = B685DE1125104D2700B6D5D2 /* CoreDataConvertible.swift */; };
 		B69435F324EB7AA6007161EF /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69435F224EB7AA6007161EF /* Todo.swift */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +61,11 @@
 		B646EC0B24FC295E00B5B7AE /* AppAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAction.swift; sourceTree = "<group>"; };
 		B646EC0D24FC298A00B5B7AE /* Reducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reducer.swift; sourceTree = "<group>"; };
 		B65CA24024EEC989004A4278 /* TodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoView.swift; sourceTree = "<group>"; };
+		B685DE02251044B200B6D5D2 /* Todo-It.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Todo-It.xcdatamodel"; sourceTree = "<group>"; };
+		B685DE04251045ED00B6D5D2 /* CDTodo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDTodo+CoreDataClass.swift"; sourceTree = "<group>"; };
+		B685DE05251045ED00B6D5D2 /* CDTodo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDTodo+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B685DE0F251047D800B6D5D2 /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
+		B685DE1125104D2700B6D5D2 /* CoreDataConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataConvertible.swift; sourceTree = "<group>"; };
 		B69435F224EB7AA6007161EF /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -107,6 +117,7 @@
 		B629F0AF24EA07DF001C2387 /* Todo-It */ = {
 			isa = PBXGroup;
 			children = (
+				B685DE0E251047A800B6D5D2 /* Persistence */,
 				B646EC0624FC290900B5B7AE /* State */,
 				B6FC221424EEC3660032E4A1 /* Models */,
 				B6FC221324EEC3620032E4A1 /* Views */,
@@ -153,6 +164,26 @@
 				B646EC0D24FC298A00B5B7AE /* Reducer.swift */,
 			);
 			path = State;
+			sourceTree = "<group>";
+		};
+		B685DE002510447400B6D5D2 /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				B685DE04251045ED00B6D5D2 /* CDTodo+CoreDataClass.swift */,
+				B685DE05251045ED00B6D5D2 /* CDTodo+CoreDataProperties.swift */,
+				B685DE01251044B200B6D5D2 /* Todo-It.xcdatamodeld */,
+				B685DE0F251047D800B6D5D2 /* PersistenceManager.swift */,
+				B685DE1125104D2700B6D5D2 /* CoreDataConvertible.swift */,
+			);
+			path = "Core Data";
+			sourceTree = "<group>";
+		};
+		B685DE0E251047A800B6D5D2 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				B685DE002510447400B6D5D2 /* Core Data */,
+			);
+			path = Persistence;
 			sourceTree = "<group>";
 		};
 		B6FC221324EEC3620032E4A1 /* Views */ = {
@@ -323,7 +354,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B685DE0C2510473A00B6D5D2 /* CDTodo+CoreDataClass.swift in Sources */,
+				B685DE0D2510473A00B6D5D2 /* CDTodo+CoreDataProperties.swift in Sources */,
 				B646EC0C24FC295E00B5B7AE /* AppAction.swift in Sources */,
+				B685DE1225104D2700B6D5D2 /* CoreDataConvertible.swift in Sources */,
+				B685DE10251047D800B6D5D2 /* PersistenceManager.swift in Sources */,
+				B685DE03251044B200B6D5D2 /* Todo-It.xcdatamodeld in Sources */,
 				B629F0B324EA07DF001C2387 /* TodoListView.swift in Sources */,
 				B646EC0E24FC298A00B5B7AE /* Reducer.swift in Sources */,
 				B646EC0824FC291100B5B7AE /* AppState.swift in Sources */,
@@ -650,6 +686,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		B685DE01251044B200B6D5D2 /* Todo-It.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				B685DE02251044B200B6D5D2 /* Todo-It.xcdatamodel */,
+			);
+			currentVersion = B685DE02251044B200B6D5D2 /* Todo-It.xcdatamodel */;
+			path = "Todo-It.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = B629F0A524EA07DF001C2387 /* Project object */;
 }

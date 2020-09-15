@@ -13,7 +13,7 @@ struct TodoView: View {
                     todo.isCompleted.toggle()
                 }
             
-            TextField("New todo", text: $todo.description) {
+            TextField("New todo", text: $todo.title) {
                 closure(todo)
             }
         }
@@ -21,7 +21,7 @@ struct TodoView: View {
 }
 
 struct TodoView_Previews: PreviewProvider {
-    @State static var todo = Todo(description: "Walk the dog")
+    @State static var todo = Todo(title: "Walk the dog")
     static var previews: some View {
         TodoView(todo: $todo) { _ in }
     }

@@ -21,7 +21,7 @@ struct TodoListView: View {
                 Button(action: {
                     if !isAddingTodo {
                         isAddingTodo = true
-                        store.send(.add(todo: Todo(description: "")))
+                        store.send(.add(todo: Todo(title: "")))
                     }
                 }) {
                     Image(systemName: "plus.circle.fill")
