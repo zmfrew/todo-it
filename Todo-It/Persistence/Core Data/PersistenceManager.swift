@@ -33,20 +33,6 @@ final class PersistenceManager {
         
         willResignActiveNotification = notification
     }
-    // TODO: - Switch to use Combine here
-    func fetchObjects(_ completion: ([Todo]) -> Void) {
-        let moc = persistentContainer.viewContext
-        let fetchRequest: NSFetchRequest<CDTodo> = CDTodo.fetchRequest()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdDate", ascending: true)]
-        
-        do {
-            let cdTodos = try moc.fetch(fetchRequest)
-            let todos = cdTodos.compactMap { $0.convert() }
-            completion(todos)
-        } catch {
-            fatalError("Failed to fetch todos: \(error)")
-        }
-    }
     
     deinit {
         notificationCenter.removeObserver(willResignActiveNotification as Any)

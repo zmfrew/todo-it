@@ -3,7 +3,7 @@ import CoreData
 
 @objc(Todo)
 final class CDTodo: NSManagedObject {
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<CDTodo> {
+    @nonobjc class func fetchRequest() -> NSFetchRequest<CDTodo> {
         NSFetchRequest<CDTodo>(entityName: String(describing: self))
     }
 }
