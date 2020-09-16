@@ -12,7 +12,8 @@ func appReducer(state: inout AppState, action: AppAction) {
         }
     case let .delete(offsets):
         state.todos.remove(atOffsets: offsets)
-
+        state.save()
+        
     case let .edit(todo):
         guard let index = state.todos.firstIndex(of: todo) else { return }
         state.todos[index] = todo
