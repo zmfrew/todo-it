@@ -11,6 +11,7 @@ struct TodoView: View {
                 .frame(width: 30, height: 30)
                 .onTapGesture {
                     todo.isCompleted.toggle()
+                    closure(todo)
                 }
             
             TextField("New todo", text: $todo.title) {
@@ -21,7 +22,7 @@ struct TodoView: View {
 }
 
 struct TodoView_Previews: PreviewProvider {
-    @State static var todo = Todo(title: "Walk the dog")
+    @State static var todo = Todo(createdDate: Date(), id: UUID(), isCompleted: false, title: "Walk the dog")
     static var previews: some View {
         TodoView(todo: $todo) { _ in }
     }

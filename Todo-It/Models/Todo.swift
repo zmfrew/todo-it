@@ -3,10 +3,10 @@ import Foundation
 struct Todo: Identifiable, Hashable {
     // TODO: - Implement categories, dueDate, and lastUpdatedDate
     // var categories: [Category]
-    let createdDate = Date()
+    let createdDate: Date
 //    let dueDate: Date
-    var isCompleted = false // Default to false because a Todo should not be created if it's already completed.
-    let id = UUID()
+    let id: UUID
+    var isCompleted: Bool
 //    var lastUpdatedDate: Date
     var title: String
 }

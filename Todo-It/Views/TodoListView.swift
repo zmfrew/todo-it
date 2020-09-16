@@ -21,7 +21,11 @@ struct TodoListView: View {
                 Button(action: {
                     if !isAddingTodo {
                         isAddingTodo = true
-                        store.send(.add(todo: Todo(title: "")))
+                        store.send(.add(todo: Todo(createdDate: Date(),
+                                                   id: UUID(),
+                                                   isCompleted: false,
+                                                   title: "")))
+                        isAddingTodo = false
                     }
                 }) {
                     Image(systemName: "plus.circle.fill")
@@ -31,6 +35,9 @@ struct TodoListView: View {
                 }
             }
             .navigationBarTitle("Todo")
+            .onAppear {
+                store.send(.fetch)
+            }
         }
     }
     

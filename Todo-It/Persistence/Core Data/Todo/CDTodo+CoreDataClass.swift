@@ -20,6 +20,8 @@ extension CDTodo: CoreDataConvertible {
     
     func convert() -> Todo? {
         Todo(
+            createdDate: self.createdDate,
+            id: self.id,
             isCompleted: self.isCompleted,
             title: self.title
         )
