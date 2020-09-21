@@ -14,9 +14,9 @@ struct TodoView: View {
                     closure(todo)
                 }
             
-            TextField("New todo", text: $todo.title) {
+            TextField("New todo", text: $todo.title, onCommit: {
                 closure(todo)
-            }
+            })
         }
     }
 }

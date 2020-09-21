@@ -3,8 +3,10 @@ import CoreData
 
 @objc(Todo)
 final class CDTodo: NSManagedObject {
-    @nonobjc class func fetchRequest() -> NSFetchRequest<CDTodo> {
-        NSFetchRequest<CDTodo>(entityName: String(describing: self))
+    @nonobjc class func fetchByCreatedDate() -> NSFetchRequest<CDTodo> {
+        let request = NSFetchRequest<CDTodo>(entityName: String(describing: self))
+        request.sortDescriptors = [NSSortDescriptor(key: "createdDate", ascending: true)]
+        return request
     }
 }
 

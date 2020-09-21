@@ -2,12 +2,15 @@ import CoreData
 import SwiftUI
 
 final class PersistenceManager {
+    private(set) var moc: NSManagedObjectContext
     private let notificationCenter: NotificationCenter
     private var willResignActiveNotification: NSObjectProtocol?
     
     let persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Todo-It")
         container.loadPersistentStores { _, error in
+            container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+
             if let error = error as NSError? {
                 fatalError("Unexpected error: \(error)\n\(error.userInfo)")
             }
@@ -18,6 +21,7 @@ final class PersistenceManager {
     
     init(_ notificationCenter: NotificationCenter) {
         self.notificationCenter = notificationCenter
+        moc = persistentContainer.viewContext
         
         let notification = notificationCenter.addObserver(
             forName: UIApplication.willResignActiveNotification,
@@ -26,8 +30,8 @@ final class PersistenceManager {
         ) { [weak self] _ in
             guard let self = self else { return }
             
-            if self.persistentContainer.viewContext.hasChanges {
-                try? self.persistentContainer.viewContext.save()
+            if self.moc.hasChanges {
+                try? self.moc.save()
             }
         }
         
@@ -35,23 +39,18 @@ final class PersistenceManager {
     }
     
     func save(_ todos: [Todo], completion: (Result<Void, Error>) -> Void) {
-        guard !todos.isEmpty else {
-            completion(.success(()))
-            return
-        }
-        
-        let context = persistentContainer.viewContext
-        
-        context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-        todos.forEach { CDTodo(object: $0, context: context) }
-        
-        guard context.hasChanges else {
+        todos.forEach { CDTodo(object: $0, context: moc) }
+        save(completion)
+    }
+    
+    private func save(_ completion: (Result<Void, Error>) -> Void) {
+        guard moc.hasChanges else {
             completion(.success(()))
             return
         }
         
         do {
-            try context.save()
+            try moc.save()
             completion(.success(()))
         } catch {
             completion(.failure(error))

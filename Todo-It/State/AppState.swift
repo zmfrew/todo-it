@@ -1,28 +1,18 @@
+import Combine
 import CoreData
 
 struct AppState {
+    private var cancellables: Set<AnyCancellable> = []
     private let persistenceManager: PersistenceManager
-    var todos: [Todo] = []
+    var todoStore: TodoStore
     
     init(_ persistenceManager: PersistenceManager) {
         self.persistenceManager = persistenceManager
+        self.todoStore = TodoStore(managedObjectContext: persistenceManager.moc)
     }
-    
-    mutating func fetch() {
-        let fetchRequest: NSFetchRequest<CDTodo> = CDTodo.fetchRequest()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdDate", ascending: true)]
         
-        do {
-            let cdTodos = try persistenceManager.persistentContainer.viewContext.fetch(fetchRequest)
-            let newTodos = cdTodos.compactMap { $0.convert() }
-            todos = newTodos
-        } catch {
-            print("failed to fetch items!")
-        }
-    }
-    
     func save() {
-        persistenceManager.save(todos) { result in
+        persistenceManager.save(todoStore.todos) { result in
             switch result {
             case .success:
                 print("Saved successfully")

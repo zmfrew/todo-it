@@ -10,8 +10,8 @@ struct TodoListView: View {
         NavigationView {
             ZStack(alignment: .bottomTrailing) {
                 List {
-                    ForEach(store.state.todos.enumerated().map { $0 }, id: \.element.id) { index, todo in
-                        TodoView(todo: $store.state.todos[index]) { editedTodo in
+                    ForEach(store.state.todoStore.todos.enumerated().map { $0 }, id: \.element.id) { index, todo in
+                        TodoView(todo: $store.state.todoStore.todos[index]) { editedTodo in
                             store.send(.edit(todo: editedTodo))
                         }
                     }
@@ -35,9 +35,6 @@ struct TodoListView: View {
                 }
             }
             .navigationBarTitle("Todo")
-            .onAppear {
-                store.send(.fetch)
-            }
         }
     }
     
