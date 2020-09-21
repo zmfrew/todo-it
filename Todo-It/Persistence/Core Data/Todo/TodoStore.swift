@@ -32,8 +32,11 @@ final class TodoStore: NSObject, ObservableObject {
         todos.append(todo)
     }
     
-    func delete(atOffsets offsets: IndexSet) {
+    @discardableResult
+    func delete(atOffsets offsets: IndexSet) -> [Todo] {
+        let todosToDelete = offsets.map { todos[$0] }
         todos.remove(atOffsets: offsets)
+        return todosToDelete
     }
     
     func edit(_ todo: Todo) {

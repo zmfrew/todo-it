@@ -38,6 +38,23 @@ final class PersistenceManager {
         willResignActiveNotification = notification
     }
     
+    func delete(_ todos: [Todo], completion: (Result<Void, Error>) -> Void) {
+        guard let cdTodos = moc.registeredObjects as? Set<CDTodo> else {
+            completion(.failure(NSError(domain: "No registered objects", code: -1)))
+            return
+        }
+        
+        let todosToDelete = cdTodos.filter { cdTodo in
+            todos.contains(where: { $0.id == cdTodo.id })
+        }
+        
+        todosToDelete.forEach {
+            moc.delete($0)
+        }
+        
+        save(completion)
+    }
+    
     func save(_ todos: [Todo], completion: (Result<Void, Error>) -> Void) {
         todos.forEach { CDTodo(object: $0, context: moc) }
         save(completion)

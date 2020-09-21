@@ -11,7 +11,8 @@ func appReducer(state: inout AppState, action: AppAction) {
         }
         
     case let .delete(offsets):
-        state.todoStore.delete(atOffsets: offsets)
+        let todos = state.todoStore.delete(atOffsets: offsets)
+        state.delete(todos)
         
     case let .edit(todo):
         state.todoStore.edit(todo)
