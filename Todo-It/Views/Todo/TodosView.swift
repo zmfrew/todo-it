@@ -1,8 +1,6 @@
 import SwiftUI
 
-typealias AppStore = Store<AppState, AppAction>
-
-struct TodoListView: View {
+struct TodosView: View {
     @EnvironmentObject var store: AppStore
     @State private var isAddingTodo = false
     
@@ -43,8 +41,8 @@ struct TodoListView: View {
     }
 }
 
-struct TodoListView_Previews: PreviewProvider {
+struct TodosView_Previews: PreviewProvider {
     static var previews: some View {
-        TodoListView()
+        TodosView()
     }
 }

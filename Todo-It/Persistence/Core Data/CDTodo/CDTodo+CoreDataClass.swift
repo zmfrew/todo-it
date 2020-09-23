@@ -1,8 +1,9 @@
 import Foundation
 import CoreData
 
-@objc(Todo)
-final class CDTodo: NSManagedObject {
+final class CDTodo: NSManagedObject { }
+
+extension CDTodo {
     @nonobjc class func fetchByCreatedDate() -> NSFetchRequest<CDTodo> {
         let request = NSFetchRequest<CDTodo>(entityName: String(describing: self))
         request.sortDescriptors = [NSSortDescriptor(key: "createdDate", ascending: true)]
