@@ -10,7 +10,7 @@ struct Todo_ItApp: App {
                 .environmentObject(
                     AppStore(
                         initialState: .init(PersistenceManager(NotificationCenter.default)),
-                         reducer: appReducer
+                        reducer: appReducer
                     )
                 )
         }
