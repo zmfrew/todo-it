@@ -1,6 +1,6 @@
 import Foundation
 
-struct Todo: Identifiable, Hashable {
+struct Todo: Hashable, Identifiable {
     // TODO: - Implement categories, dueDate, and lastUpdatedDate
     // var categories: [Category]
     let createdDate: Date

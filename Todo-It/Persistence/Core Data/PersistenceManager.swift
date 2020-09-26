@@ -1,6 +1,8 @@
 import CoreData
 import SwiftUI
 
+protocol CoreDataSavable: CoreDataConvertible, Identifiable, Hashable { }
+
 final class PersistenceManager {
     private(set) var moc: NSManagedObjectContext
     private let notificationCenter: NotificationCenter
@@ -37,13 +39,43 @@ final class PersistenceManager {
         
         willResignActiveNotification = notification
     }
+    // TODO: - Try using generic functions
+//    func delete<T: CoreDataSavable>(_ items: [T], completion: (Result<Void, Error>) -> Void) {
+//        guard let cdItems = moc.registeredObjects as? Set<T> else {
+//            completion(.failure(NSError(domain: "No registered objects", code: -1)))
+//            return
+//        }
+//
+//        let itemsToDelete = cdItems.filter { cdItem in
+//            items.contains(where: { $0.id == cdItem.id })
+//        }
+//
+//        itemsToDelete.forEach {
+//            if let item = $0 as? NSManagedObject {
+//                moc.delete(item)
+//            }
+//        }
+//
+//        save(completion)
+//    }
     
-    func delete(_ todos: [Todo], completion: (Result<Void, Error>) -> Void) {
-        guard let cdTodos = moc.registeredObjects as? Set<CDTodo> else {
-            completion(.failure(NSError(domain: "No registered objects", code: -1)))
-            return
+    func delete(_ lists: [TodoList], completion: (Result<Void, Error>) -> Void) {
+        let cdLists = moc.registeredObjects.compactMap { $0 as? CDList }
+        
+        let listsToDelete = cdLists.filter { cdTodo in
+            lists.contains(where: { $0.id == cdTodo.id })
         }
         
+        listsToDelete.forEach {
+            moc.delete($0)
+        }
+        
+        save(completion)
+    }
+    
+    func delete(_ todos: [Todo], completion: (Result<Void, Error>) -> Void) {
+        let cdTodos = moc.registeredObjects.compactMap { $0 as? CDTodo }
+
         let todosToDelete = cdTodos.filter { cdTodo in
             todos.contains(where: { $0.id == cdTodo.id })
         }
@@ -52,6 +84,20 @@ final class PersistenceManager {
             moc.delete($0)
         }
         
+        save(completion)
+    }
+    
+//    func save<T: CoreDataSavable>(_ items: [T], completion: (Result<Void, Error>) -> Void) {
+//        items.forEach {
+//            guard let convertibleType = $0 as? T.ConvertibleType else { return }
+//
+//            _ = T(object: convertibleType, context: moc)
+//        }
+//        save(completion)
+//    }
+    
+    func save(_ lists: [TodoList], completion: (Result<Void, Error>) -> Void) {
+        lists.forEach { CDList(object: $0, context: moc) }
         save(completion)
     }
     

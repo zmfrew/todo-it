@@ -23,6 +23,7 @@
 		B646EC0E24FC298A00B5B7AE /* Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B646EC0D24FC298A00B5B7AE /* Reducer.swift */; };
 		B647B4CC251921470079E05D /* TodoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B647B4CB251921470079E05D /* TodoStore.swift */; };
 		B65CA24124EEC989004A4278 /* TodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65CA24024EEC989004A4278 /* TodoView.swift */; };
+		B6751CAB251F934A00FDC4E2 /* TodoListStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6751CAA251F934A00FDC4E2 /* TodoListStore.swift */; };
 		B685DE03251044B200B6D5D2 /* Todo-It.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B685DE01251044B200B6D5D2 /* Todo-It.xcdatamodeld */; };
 		B685DE0C2510473A00B6D5D2 /* CDTodo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B685DE04251045ED00B6D5D2 /* CDTodo+CoreDataClass.swift */; };
 		B685DE0D2510473A00B6D5D2 /* CDTodo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B685DE05251045ED00B6D5D2 /* CDTodo+CoreDataProperties.swift */; };
@@ -71,6 +72,7 @@
 		B646EC0D24FC298A00B5B7AE /* Reducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reducer.swift; sourceTree = "<group>"; };
 		B647B4CB251921470079E05D /* TodoStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoStore.swift; sourceTree = "<group>"; };
 		B65CA24024EEC989004A4278 /* TodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoView.swift; sourceTree = "<group>"; };
+		B6751CAA251F934A00FDC4E2 /* TodoListStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListStore.swift; sourceTree = "<group>"; };
 		B685DE02251044B200B6D5D2 /* Todo-It.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Todo-It.xcdatamodel"; sourceTree = "<group>"; };
 		B685DE04251045ED00B6D5D2 /* CDTodo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDTodo+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B685DE05251045ED00B6D5D2 /* CDTodo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDTodo+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 		B6A18AAE251B9120007FADF7 /* CDList */ = {
 			isa = PBXGroup;
 			children = (
+				B6751CAA251F934A00FDC4E2 /* TodoListStore.swift */,
 				B634A0E0251B9326008ADBDB /* CDList+CoreDataClass.swift */,
 				B634A0E1251B9326008ADBDB /* CDList+CoreDataProperties.swift */,
 			);
@@ -414,6 +417,7 @@
 				B634A0E3251B9326008ADBDB /* CDList+CoreDataProperties.swift in Sources */,
 				B629F0B324EA07DF001C2387 /* TodosView.swift in Sources */,
 				B646EC0E24FC298A00B5B7AE /* Reducer.swift in Sources */,
+				B6751CAB251F934A00FDC4E2 /* TodoListStore.swift in Sources */,
 				B646EC0824FC291100B5B7AE /* AppState.swift in Sources */,
 				B69435F324EB7AA6007161EF /* Todo.swift in Sources */,
 				B646EC0A24FC292300B5B7AE /* Store.swift in Sources */,

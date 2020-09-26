@@ -6,7 +6,7 @@ typealias AppStore = Store<AppState, AppAction>
 struct Todo_ItApp: App {
     var body: some Scene {
         WindowGroup {
-            TodosView()
+            TodoListView()
                 .environmentObject(
                     AppStore(
                         initialState: .init(PersistenceManager(NotificationCenter.default)),

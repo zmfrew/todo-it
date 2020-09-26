@@ -8,9 +8,65 @@ import SwiftUI
  5. Pass todos from the given list into the TodosView
  */
 struct TodoListView: View {
+    @EnvironmentObject var store: AppStore
+    @State private var title = ""
+    @State private var isAddingList = false
     
     var body: some View {
-        Text("TBD")
+        NavigationView {
+            ZStack(alignment: .bottomTrailing) {
+                List {
+                    ForEach(store.state.listStore.lists) { list in
+                        NavigationLink(
+                            destination: TodosView().environmentObject(store),
+                            label: {
+                                Text(list.title)
+                            })
+                    }
+                    .onDelete(perform: delete)
+                }
+                
+                Button(action: {
+                    isAddingList = true
+                }) {
+                    Image(systemName: "plus.circle.fill")
+                        .resizable()
+                        .frame(width: 50, height: 50)
+                        .padding(.all, 40)
+                }
+            }
+            .sheet(isPresented: $isAddingList, onDismiss: {
+                store.send(.addList(TodoList(
+                                        id: UUID(),
+                                        title: title,
+                                        todos: []
+                                    )
+                                )
+                            )
+            }) {
+                NewListView(title: $title)
+            }
+            .navigationBarTitle("Lists")
+        }
+    }
+    
+    func delete(at offsets: IndexSet) {
+        store.send(.deleteLists(at: offsets))
+    }
+}
+
+struct NewListView: View {
+    @Environment(\.presentationMode) var presentationMode
+    @Binding var title: String
+    
+    var body: some View {
+        VStack {
+            TextField("List title", text: $title)
+            Button("Dismiss") {
+                
+                presentationMode.wrappedValue.dismiss()
+            }
+        }
     }
 }
 

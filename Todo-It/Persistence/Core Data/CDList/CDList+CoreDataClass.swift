@@ -4,8 +4,10 @@ import CoreData
 final class CDList: NSManagedObject { }
 
 extension CDList {
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<CDList> {
-        NSFetchRequest<CDList>(entityName: String(describing: self))
+    @nonobjc class func fetchByTitle() -> NSFetchRequest<CDList> {
+        let request = NSFetchRequest<CDList>(entityName: String(describing: self))
+        request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
+        return request
     }
 }
 

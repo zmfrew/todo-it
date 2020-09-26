@@ -1,6 +1,7 @@
 import Combine
 import CoreData
-
+// FIXME: - Refactor to support lists.
+// FIXME: - Might not even need this as todos are tied to lists
 final class TodoStore: NSObject, ObservableObject {
     @Published var todos: [Todo] = []
     private let frc: NSFetchedResultsController<CDTodo>

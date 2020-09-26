@@ -19,10 +19,14 @@ struct TodosView: View {
                 Button(action: {
                     if !isAddingTodo {
                         isAddingTodo = true
-                        store.send(.add(todo: Todo(createdDate: Date(),
-                                                   id: UUID(),
-                                                   isCompleted: false,
-                                                   title: "")))
+                        store.send(.addTodo(Todo(
+                                                createdDate: Date(),
+                                                id: UUID(),
+                                                isCompleted: false,
+                                                title: ""
+                                            )
+                                        )
+                                    )
                         isAddingTodo = false
                     }
                 }) {
@@ -37,7 +41,7 @@ struct TodosView: View {
     }
     
     func delete(at offsets: IndexSet) {
-        store.send(.delete(at: offsets))
+        store.send(.deleteTodos(at: offsets))
     }
 }
 
