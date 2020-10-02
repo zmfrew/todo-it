@@ -55,21 +55,6 @@ struct TodoListView: View {
     }
 }
 
-struct NewListView: View {
-    @Environment(\.presentationMode) var presentationMode
-    @Binding var title: String
-    
-    var body: some View {
-        VStack {
-            TextField("List title", text: $title)
-            Button("Dismiss") {
-                
-                presentationMode.wrappedValue.dismiss()
-            }
-        }
-    }
-}
-
 struct TodoListView_Previews: PreviewProvider {
     static var previews: some View {
         TodoListView()

@@ -23,6 +23,7 @@
 		B646EC0E24FC298A00B5B7AE /* Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B646EC0D24FC298A00B5B7AE /* Reducer.swift */; };
 		B647B4CC251921470079E05D /* TodoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B647B4CB251921470079E05D /* TodoStore.swift */; };
 		B65CA24124EEC989004A4278 /* TodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65CA24024EEC989004A4278 /* TodoView.swift */; };
+		B669A1E8252788890061DC36 /* NewListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B669A1E7252788890061DC36 /* NewListView.swift */; };
 		B6751CAB251F934A00FDC4E2 /* TodoListStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6751CAA251F934A00FDC4E2 /* TodoListStore.swift */; };
 		B685DE03251044B200B6D5D2 /* Todo-It.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B685DE01251044B200B6D5D2 /* Todo-It.xcdatamodeld */; };
 		B685DE0C2510473A00B6D5D2 /* CDTodo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B685DE04251045ED00B6D5D2 /* CDTodo+CoreDataClass.swift */; };
@@ -72,6 +73,7 @@
 		B646EC0D24FC298A00B5B7AE /* Reducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reducer.swift; sourceTree = "<group>"; };
 		B647B4CB251921470079E05D /* TodoStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoStore.swift; sourceTree = "<group>"; };
 		B65CA24024EEC989004A4278 /* TodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoView.swift; sourceTree = "<group>"; };
+		B669A1E7252788890061DC36 /* NewListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewListView.swift; sourceTree = "<group>"; };
 		B6751CAA251F934A00FDC4E2 /* TodoListStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListStore.swift; sourceTree = "<group>"; };
 		B685DE02251044B200B6D5D2 /* Todo-It.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Todo-It.xcdatamodel"; sourceTree = "<group>"; };
 		B685DE04251045ED00B6D5D2 /* CDTodo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDTodo+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				B634A100251B9645008ADBDB /* TodoListView.swift */,
+				B669A1E7252788890061DC36 /* NewListView.swift */,
 			);
 			path = "Todo List";
 			sourceTree = "<group>";
@@ -413,6 +416,7 @@
 				B647B4CC251921470079E05D /* TodoStore.swift in Sources */,
 				B685DE03251044B200B6D5D2 /* Todo-It.xcdatamodeld in Sources */,
 				B634A0E2251B9326008ADBDB /* CDList+CoreDataClass.swift in Sources */,
+				B669A1E8252788890061DC36 /* NewListView.swift in Sources */,
 				B634A101251B9645008ADBDB /* TodoListView.swift in Sources */,
 				B634A0E3251B9326008ADBDB /* CDList+CoreDataProperties.swift in Sources */,
 				B629F0B324EA07DF001C2387 /* TodosView.swift in Sources */,

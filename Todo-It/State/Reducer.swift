@@ -3,6 +3,8 @@ typealias Reducer<State, Action> = (inout State, Action) -> Void
 func appReducer(state: inout AppState, action: AppAction) {
     switch action {
     case let .addList(list):
+        guard !list.title.isEmpty else { return }
+        
         state.listStore.add(list)
         state.saveLists()
         
