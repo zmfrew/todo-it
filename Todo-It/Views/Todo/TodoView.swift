@@ -22,7 +22,14 @@ struct TodoView: View {
 }
 
 struct TodoView_Previews: PreviewProvider {
-    @State static var todo = Todo(createdDate: Date(), id: UUID(), isCompleted: false, title: "Walk the dog")
+    @State static var todo = Todo(
+        createdDate: Date(),
+        dueDate: Date(),
+        id: UUID(),
+        isCompleted: false,
+        title: "Walk the dog"
+    )
+    
     static var previews: some View {
         TodoView(todo: $todo) { _ in }
     }

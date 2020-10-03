@@ -16,6 +16,7 @@ extension CDTodo: CoreDataConvertible {
     convenience init(object: Todo, context: NSManagedObjectContext) {
         self.init(context: context)
         self.createdDate = object.createdDate
+        self.dueDate = object.dueDate
         self.id = object.id
         self.isCompleted = object.isCompleted
         self.title = object.title
@@ -24,6 +25,7 @@ extension CDTodo: CoreDataConvertible {
     func convert() -> Todo? {
         Todo(
             createdDate: self.createdDate,
+            dueDate: self.dueDate,
             id: self.id,
             isCompleted: self.isCompleted,
             title: self.title

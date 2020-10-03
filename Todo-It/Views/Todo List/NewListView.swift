@@ -9,8 +9,9 @@ struct NewListView: View {
             HStack {
                 Image(systemName: "list.bullet")
                     .foregroundColor(Color.blue.opacity(0.6))
-            TextField("List title", text: $title)
-                .frame(width: 200)
+                
+                TextField("List title", text: $title)
+                    .frame(width: 200)
             }
             .padding(12)
             .overlay(
