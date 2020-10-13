@@ -1,7 +1,7 @@
 import CoreData
 import Foundation
 
-extension CDTodo {
+extension Todo {
     @NSManaged var createdDate: Date
     @NSManaged var dueDate: Date
     @NSManaged var title: String
@@ -9,4 +9,4 @@ extension CDTodo {
     @NSManaged var id: UUID
 }
 
-extension CDTodo: Identifiable { }
+extension Todo: Identifiable { }

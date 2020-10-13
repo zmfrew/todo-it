@@ -1,18 +1,18 @@
 import Foundation
 import CoreData
 
-extension CDList {
+extension TodoList {
     @NSManaged var title: String
     @NSManaged var id: UUID
     @NSManaged var todos: NSOrderedSet
 }
 
-extension CDList {
+extension TodoList {
     @objc(addTodosObject:)
-    @NSManaged public func addToTodos(_ value: CDTodo)
+    @NSManaged public func addToTodos(_ value: Todo)
 
     @objc(removeTodosObject:)
-    @NSManaged public func removeFromTodos(_ value: CDTodo)
+    @NSManaged public func removeFromTodos(_ value: Todo)
 
     @objc(addTodos:)
     @NSManaged public func addToTodos(_ values: NSOrderedSet)
@@ -22,4 +22,4 @@ extension CDList {
 
 }
 
-extension CDList: Identifiable { }
+extension TodoList: Identifiable { }

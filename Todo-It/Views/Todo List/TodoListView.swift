@@ -36,13 +36,7 @@ struct TodoListView: View {
                 }
             }
             .sheet(isPresented: $isAddingList, onDismiss: {
-                store.send(.addList(TodoList(
-                                        id: UUID(),
-                                        title: title,
-                                        todos: []
-                                    )
-                                )
-                            )
+                store.send(.addList(title))
             }) {
                 NewListView(title: $title)
             }

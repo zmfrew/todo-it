@@ -9,8 +9,12 @@ struct AppState {
     
     init(_ persistenceManager: PersistenceManager) {
         self.persistenceManager = persistenceManager
-        self.listStore = TodoListStore(managedObjectContext: persistenceManager.moc)
+        self.listStore = TodoListStore(manager: persistenceManager)
         self.todoStore = TodoStore(managedObjectContext: persistenceManager.moc)
+    }
+    
+    func addList(_ title: String) {
+        persistenceManager.addList(title)
     }
     
     func deleteLists(_ lists: [TodoList]) {
@@ -33,30 +37,6 @@ struct AppState {
                 
             case .failure(let error):
                 print("Error occurred deleting todos: \(error.localizedDescription)")
-            }
-        }
-    }
-        
-    func saveLists() {
-        persistenceManager.save(listStore.lists) { result in
-            switch result {
-            case .success:
-                print("Saved lists successfully")
-                
-            case .failure(let error):
-                print("Error occurred saving lists: \(error.localizedDescription)")
-            }
-        }
-    }
-    
-    func saveTodos() {
-        persistenceManager.save(todoStore.todos) { result in
-            switch result {
-            case .success:
-                print("Saved todos successfully")
-                
-            case .failure(let error):
-                print("Error occurred saving todos: \(error.localizedDescription)")
             }
         }
     }

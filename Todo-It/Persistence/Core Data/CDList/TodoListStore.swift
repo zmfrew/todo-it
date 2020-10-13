@@ -3,12 +3,15 @@ import CoreData
 
 final class TodoListStore: NSObject, ObservableObject {
     @Published var lists: [TodoList] = []
-    private let frc: NSFetchedResultsController<CDList>
+    private var cancellables = Set<AnyCancellable>()
+    private let manager: PersistenceManager
+    private let frc: NSFetchedResultsController<TodoList>
     
-    init(managedObjectContext: NSManagedObjectContext) {
+    init(manager: PersistenceManager) {
+        self.manager = manager
         frc = NSFetchedResultsController(
-            fetchRequest: CDList.fetchByTitle(),
-            managedObjectContext: managedObjectContext,
+            fetchRequest: TodoList.fetchByTitle(),
+            managedObjectContext: manager.persistentContainer.viewContext,
             sectionNameKeyPath: nil,
             cacheName: nil
         )
@@ -20,36 +23,24 @@ final class TodoListStore: NSObject, ObservableObject {
         do {
             try frc.performFetch()
             
-            lists = frc.fetchedObjects?.compactMap { $0.convert() } ?? []
+            lists = frc.fetchedObjects ?? []
         } catch {
-            print("Failed to fetch lists.")
+            print("Failed to fetch")
         }
-    }
-    
-    func add(_ list: TodoList) {
-        guard !lists.contains(list) else { return }
-        
-        lists.append(list)
-    }
-    
-    @discardableResult
-    func delete(atOffsets offsets: IndexSet) -> [TodoList] {
-        let listsToDelete = offsets.map { lists[$0] }
-        lists.remove(atOffsets: offsets)
-        return listsToDelete
-    }
-    
-    func edit(_ list: TodoList) {
-        guard let index = lists.firstIndex(of: list) else { return }
-        
-        lists[index] = list
+//        manager.publisher(for: TodoList.Type, in: manager.persistentContainer.viewContext, changeTypes: [.deleted, .inserted, .updated])
+//        manager.publisher(for: TodoList.Type, in: manager.persistentContainer.viewContext, changeTypes: [.deleted, .inserted, .updated])
+//            .sink { _ in
+//                manager.persistentContainer.viewContext.perform {
+//                }
+//            }
+//            .store(in: &cancellables)
     }
 }
 
 extension TodoListStore: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        guard let todoItems = controller.fetchedObjects as? [CDList] else { return }
+        guard let todoItems = controller.fetchedObjects as? [TodoList] else { return }
 
-        lists = todoItems.compactMap { $0.convert() }
+        lists = todoItems
     }
 }

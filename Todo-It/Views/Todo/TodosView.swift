@@ -13,7 +13,6 @@ struct TodosView: View {
         ZStack(alignment: .bottomTrailing) {
             List {
                 ForEach(groups, id: \.self) { todos in
-                    Text("\(todos[0].dueDate)")
                     ForEach(store.state.todoStore.todos.enumerated().map { $0 }, id: \.element.id) { index, todo in
                         TodoView(todo: $store.state.todoStore.todos[index]) { editedTodo in
                             store.send(.edit(todo: editedTodo))
@@ -26,15 +25,7 @@ struct TodosView: View {
             Button(action: {
                 if !isAddingTodo {
                     isAddingTodo = true
-                    store.send(.addTodo(Todo(
-                        createdDate: Date(),
-                        dueDate: Date(),
-                        id: UUID(),
-                        isCompleted: false,
-                        title: ""
-                                        )
-                                    )
-                                )
+                    store.send(.addTodo(dueDate: Date(), title: ""))
                     isAddingTodo = false
                 }
             }) {
