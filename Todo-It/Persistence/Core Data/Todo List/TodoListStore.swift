@@ -29,18 +29,12 @@ final class TodoListStore: NSObject, ObservableObject {
         }
         
         manager.publisher(for: TodoList.self, in: manager.moc, changeTypes: [.inserted, .updated, .deleted])
-          .sink { [weak self] changes in
-            self?.manager.moc.perform {
-                for change in changes {
-                    
-                }
-            }
+          .sink { _ in//[weak self] changes in
               // iterate over changes
               // make sure to do so on the correct queue if applicable with .perform
             
           }
           .store(in: &cancellables)
-//            .store(in: &cancellables)
     }
 }
 
