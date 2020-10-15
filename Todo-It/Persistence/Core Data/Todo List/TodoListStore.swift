@@ -27,12 +27,19 @@ final class TodoListStore: NSObject, ObservableObject {
         } catch {
             print("Failed to fetch")
         }
-//        manager.publisher(for: TodoList.Type, in: manager.persistentContainer.viewContext, changeTypes: [.deleted, .inserted, .updated])
-//        manager.publisher(for: TodoList.Type, in: manager.persistentContainer.viewContext, changeTypes: [.deleted, .inserted, .updated])
-//            .sink { _ in
-//                manager.persistentContainer.viewContext.perform {
-//                }
-//            }
+        
+        manager.publisher(for: TodoList.self, in: manager.moc, changeTypes: [.inserted, .updated, .deleted])
+          .sink { [weak self] changes in
+            self?.manager.moc.perform {
+                for change in changes {
+                    
+                }
+            }
+              // iterate over changes
+              // make sure to do so on the correct queue if applicable with .perform
+            
+          }
+          .store(in: &cancellables)
 //            .store(in: &cancellables)
     }
 }

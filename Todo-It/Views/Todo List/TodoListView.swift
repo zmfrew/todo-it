@@ -1,15 +1,7 @@
 import SwiftUI
-// TODO: - Update this view to do
-/*
- 1. Display list of todolists
- 2. Allow adding a new list
- 3. Allow deleting lists
- 4. Allow renaming lists
- 5. Pass todos from the given list into the TodosView
- */
+
 struct TodoListView: View {
     @EnvironmentObject var store: AppStore
-    @State private var title = ""
     @State private var isAddingList = false
     
     var body: some View {
@@ -35,10 +27,9 @@ struct TodoListView: View {
                         .padding(.all, 40)
                 }
             }
-            .sheet(isPresented: $isAddingList, onDismiss: {
-                store.send(.addList(title))
-            }) {
-                NewListView(title: $title)
+            .sheet(isPresented: $isAddingList) {
+                NewListView()
+                    .environmentObject(store)
             }
             .navigationBarTitle("Lists")
         }

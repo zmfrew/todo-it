@@ -2,7 +2,8 @@ import SwiftUI
 
 struct NewListView: View {
     @Environment(\.presentationMode) var presentationMode
-    @Binding var title: String
+    @EnvironmentObject var store: AppStore
+    @State private var title = ""
     
     var body: some View {
         VStack {
@@ -20,6 +21,7 @@ struct NewListView: View {
             )
             
             Button("Save") {
+                store.send(.addList(title))
                 presentationMode.wrappedValue.dismiss()
             }
             .foregroundColor(.white)
@@ -34,6 +36,6 @@ struct NewListView: View {
 struct NewListView_Previews: PreviewProvider {
     @State static var title = ""
     static var previews: some View {
-        NewListView(title: $title)
+        NewListView()
     }
 }

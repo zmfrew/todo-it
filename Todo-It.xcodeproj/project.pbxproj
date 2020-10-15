@@ -194,8 +194,8 @@
 		B685DE002510447400B6D5D2 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
-				B6A18AAE251B9120007FADF7 /* CDList */,
-				B68C286625111DCF00D9D7A2 /* CDTodo */,
+				B6A18AAE251B9120007FADF7 /* Todo List */,
+				B68C286625111DCF00D9D7A2 /* Todo */,
 				B685DE01251044B200B6D5D2 /* Todo-It.xcdatamodeld */,
 				B685DE0F251047D800B6D5D2 /* PersistenceManager.swift */,
 			);
@@ -210,24 +210,24 @@
 			path = Persistence;
 			sourceTree = "<group>";
 		};
-		B68C286625111DCF00D9D7A2 /* CDTodo */ = {
+		B68C286625111DCF00D9D7A2 /* Todo */ = {
 			isa = PBXGroup;
 			children = (
 				B647B4CB251921470079E05D /* TodoStore.swift */,
 				B685DE04251045ED00B6D5D2 /* Todo+CoreDataClass.swift */,
 				B685DE05251045ED00B6D5D2 /* Todo+CoreDataProperties.swift */,
 			);
-			path = CDTodo;
+			path = Todo;
 			sourceTree = "<group>";
 		};
-		B6A18AAE251B9120007FADF7 /* CDList */ = {
+		B6A18AAE251B9120007FADF7 /* Todo List */ = {
 			isa = PBXGroup;
 			children = (
 				B6751CAA251F934A00FDC4E2 /* TodoListStore.swift */,
 				B634A0E0251B9326008ADBDB /* TodoList+CoreDataClass.swift */,
 				B634A0E1251B9326008ADBDB /* TodoList+CoreDataProperties.swift */,
 			);
-			path = CDList;
+			path = "Todo List";
 			sourceTree = "<group>";
 		};
 		B6FC221324EEC3620032E4A1 /* Views */ = {

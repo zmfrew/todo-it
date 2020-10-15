@@ -15,7 +15,7 @@ enum ChangeType {
 }
 
 final class PersistenceManager {
-    private let backgroundContext: NSManagedObjectContext
+    let backgroundContext: NSManagedObjectContext
     private(set) var moc: NSManagedObjectContext
     private let notificationCenter: NotificationCenter
     private var willResignActiveNotification: NSObjectProtocol?
@@ -24,6 +24,7 @@ final class PersistenceManager {
         let container = NSPersistentContainer(name: "Todo-It")
         container.loadPersistentStores { _, error in
             container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+            container.viewContext.automaticallyMergesChangesFromParent = true
 
             if let error = error as NSError? {
                 fatalError("Unexpected error: \(error)\n\(error.userInfo)")
@@ -130,48 +131,24 @@ final class PersistenceManager {
     }
     
     func publisher<T: NSManagedObject>(
-        for managedObject: T,
-        in context: NSManagedObjectContext,
-        changeTypes: [ChangeType]
-    ) -> AnyPublisher<(T?, ChangeType), Never> {
-        let notification = NSManagedObjectContext.didMergeChangesObjectIDsNotification
-        return notificationCenter.publisher(for: notification, object: context)
-            .compactMap { notification in
-                for type in changeTypes {
-                    if let object = self.managedObject(
-                        with: managedObject.objectID,
-                        changeType: type,
-                        from: notification,
-                        in: context
-                    ) as? T {
-                        return (object, type)
-                    }
-                }
-                
-                return nil
-            }
-            .eraseToAnyPublisher()
-    }
-    
-    func publisher<T: NSManagedObject>(
         for type: T.Type,
         in context: NSManagedObjectContext,
         changeTypes: [ChangeType]
     ) -> AnyPublisher<[([T], ChangeType)], Never> {
         let notification = NSManagedObjectContext.didMergeChangesObjectIDsNotification
-        return NotificationCenter.default.publisher(for: notification, object: context)
-            .compactMap({ notification in
-                return changeTypes.compactMap({ type -> ([T], ChangeType)? in
-                    guard let changes = notification.userInfo?[type.userInfoKey] as? Set<NSManagedObjectID> else {
-                        return nil
-                    }
+        return NotificationCenter.default
+            .publisher(for: notification, object: context)
+            .compactMap { notification in
+                changeTypes.compactMap { type -> ([T], ChangeType)? in
+                    guard let changes = notification.userInfo?[type.userInfoKey] as? Set<NSManagedObjectID> else { return nil }
                     
                     let objects = changes
-                        .filter({ objectID in objectID.entity == T.entity() })
-                        .compactMap({ objectID in context.object(with: objectID) as? T })
+                        .filter { $0.entity == T.entity() }
+                        .compactMap { context.object(with: $0) as? T }
                     return (objects, type)
-                })
-            })
+                }
+            }
+            .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
 
